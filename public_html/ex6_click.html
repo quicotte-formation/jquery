@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
+        
+        <script src="JS/jquery-3.1.1.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            
+            function getComposanteRGBAleat(){
+                
+                var n = Math.ceil(Math.random() * 255);
+                n=n.toString(16);
+                if( n.length<2 )
+                    n="0" + n;
+                
+                return n;
+            }
+            
+            function getCouleurRGBAleat(){
+                
+                var r = getComposanteRGBAleat(255);
+                var g = getComposanteRGBAleat(255);
+                var b = getComposanteRGBAleat(255);
+                
+                return "#" + r + g + b;
+            }
+            
+            function getTableauCouleursDifferentes(nbCouleurs){
+                
+                // Crée tableau couleurs toutes différentes
+                var tab=new Array();
+                for(i=0;i<nbCouleurs;i++){
+                    
+                    while(true){
+                        
+                        var couleur = getCouleurRGBAleat();
+                        if( tab.indexOf(couleur)<0 ){
+                            
+                            tab.push(couleur);
+                            break;
+                        }
+                    }
+                }
+                
+                return tab;
+            }
+            
+            function getTableauPairesCouleursAleat(nbCouleurs){
+                
+                var tab = getTableauCouleursDifferentes();
+                
+                // Crée un tableau avec des paires de couleurs
+                var tabPaires = new Array();
+                for(i=0;i<tab.length;i++){
+                    tabPaires.push(tab[1]);
+                    tabPaires.push(tab[1]);
+                }
+                
+                return tabPaires;
+            }
+            
+            function melangerTab(tabSource){
+                
+                var tabCible = new Array();
+                
+                for(i=0;i<tabSource.length;i++){
+
+                    var indiceASupprimer = Math.ceil( Math.random()*tabSource.length );
+                    
+                    tabCible.push(tabSource[indiceASupprimer]);
+                    tabSource.splice(indiceASupprimer, 1);
+                }
+                
+                return tabCible;
+            }
+            
+            function creePlateau(l, h){
+                
+                // Génère le plateau
+                var htmlTableau = "";
+                
+                for(i=0;i<l;i++){
+                    
+                    htmlTableau += "<tr>";
+                    
+                    for(j=0;j<h;j++){
+                         htmlTableau += '<td ligne="' + i + '" colonne="' + j + '">';
+                         htmlTableau += '<input type="button"/>';
+                         htmlTableau += "</td>";
+                    }
+                    
+                    htmlTableau += "</tr>";
+                }
+                
+                $('#plateau').append(htmlTableau);
+                
+                $('#plateau input').css('width', '25px');
+                $('#plateau input').css('height', '25px');
+                
+                // Définit un attr valeurCachee sur chaque case
+                var tabCouleurs = new Array();
+                
+                // Arme clic sur chaque case
+                $('#plateau input').click( function(event){
+                    
+                    $(event.target).toggle();
+                });
+            }
+            
+            $(document).ready(function(){
+                
+                // Demande taille plateau
+                var taillePlateau = prompt('Largeur du plateau ?');
+                
+                // Création plateau
+                creePlateau(taillePlateau,taillePlateau);
+            });
+            
+        </script>
+    </head>
+    <body>
+        
+        <input type="button" value="Afficher / Masquer" onclick="afficheMasque();"/>
+        <table id="plateau">***</table>
+    </body>
+</html>
