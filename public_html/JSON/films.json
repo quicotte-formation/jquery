@@ -1,0 +1,7 @@
+{
+  "films": [
+      {"id": 1, "titre": "Dracula", "synopsis": "blabla"},
+      {"id": 2, "titre": "Nosferatu", "synopsis": "blabla"},
+      {"id": 3, "titre": "Kung-fu Panda", "synopsis": "blabla"}
+  ]
+}
