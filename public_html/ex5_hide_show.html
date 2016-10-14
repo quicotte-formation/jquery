@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
+        
+        <script src="JS/jquery-3.1.1.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            
+            var hidden=false;
+            
+            function afficheMasque(){
+                
+                if(hidden)
+                    $('#effaceMoi').show();
+                else
+                    $('#effaceMoi').hide();
+                
+                hidden = !hidden;// Inversion
+            }
+            
+        </script>
+    </head>
+    <body>
+        <input type="button" value="Afficher / Masquer" onclick="afficheMasque();"/>
+        <div id="effaceMoi"> *** EFFACE MOI *** </div>
+    </body>
+</html>
